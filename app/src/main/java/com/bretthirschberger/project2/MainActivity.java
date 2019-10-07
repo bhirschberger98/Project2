@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
     public void login(View view) {
         String email = mEmailField.getText().toString().trim();
         if (checkValidLogin()) {
-            startActivity(new Intent(this, AccountHome.class).putExtra("email", email));
+//            startActivity(new Intent(this, AccountHome.class).putExtra("email", email));
+            startActivity(new Intent(this, QuestionActivity.class));
         } else {
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
         }

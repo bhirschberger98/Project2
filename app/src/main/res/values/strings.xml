@@ -23,4 +23,5 @@
     <string name="invalid_date">Invalid Date</string>
     <string name="password_match">Passwords Must Match</string>
     <string name="invalid_email">Invalid Email</string>
+    <string name="rules">There Will be 5 questions, both multiple choice and multiple answer. Good Luck!</string>
 </resources>
