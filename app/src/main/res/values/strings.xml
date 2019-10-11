@@ -24,4 +24,26 @@
     <string name="password_match">Passwords Must Match</string>
     <string name="invalid_email">Invalid Email</string>
     <string name="rules">There Will be 5 questions, both multiple choice and multiple answer. Good Luck!</string>
+
+    <string name="q1">What is the largest planet in the solar system</string>
+    <string name="q1a1">The Sun</string>
+    <string name="q1a2">Jupiter</string>
+    <string name="q1a3">Mercury</string>
+    <string name="q1a4">Neptune</string>
+
+    <string name="question2">Which of the following elements are radioactive</string>
+    <string name="q2a1">Helium</string>
+    <string name="q2a2">Uranium</string>
+    <string name="q2a3">Krypton</string>
+    <string name="q2a4">Americium</string>
+    <string name="q2a5">Oxygen</string>
+
+    <string name="question3"></string>
+
+    <string name="question4"></string>
+
+    <string name="question5"></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
