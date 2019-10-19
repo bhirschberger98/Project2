@@ -1,5 +1,6 @@
 package com.bretthirschberger.project2;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -45,6 +46,8 @@ public class MultipleChoiceFragment extends Fragment {
 
     private Button mButton;
 
+    private boolean mIsCorrect;
+
     public MultipleChoiceFragment() {
         // Required empty public constructor
     }
@@ -80,38 +83,36 @@ public class MultipleChoiceFragment extends Fragment {
         mOptions = v.findViewById(R.id.options);
         mQuestion = v.findViewById(R.id.question);
         mButton = v.findViewById(R.id.next);
-        mButton.setOnClickListener(mListener::goToNext);
+        mButton.setEnabled(false);
         if (getArguments() != null) {
             mOption1.setText(getArguments().getString(OPTION1));
             mOption2.setText(getArguments().getString(OPTION2));
             mOption3.setText(getArguments().getString(OPTION3));
             mOption4.setText(getArguments().getString(OPTION4));
             mQuestion.setText(getArguments().getString(QUESTION));
-            mOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    Log.i("ans", checkedId + "");
-                    Log.i("ans", getArguments().getInt(CORRECT_ANSWER) + "");
+            mOptions.setOnCheckedChangeListener((group, checkedId) -> {
+                Log.i("ans", checkedId + "");
+                Log.i("ans", getArguments().getInt(CORRECT_ANSWER) + "");
 //                    getView().findViewById(R.id.option1).get
-                    if(checkedId==R.id.option1&&getArguments().getInt(CORRECT_ANSWER)==1){
-                        mListener.onOptionSelected(true);
-                    }else if(checkedId==R.id.option2&&getArguments().getInt(CORRECT_ANSWER)==2){
-                        mListener.onOptionSelected(true);
-                    }else if(checkedId==R.id.option3&&getArguments().getInt(CORRECT_ANSWER)==3){
-                        mListener.onOptionSelected(true);
-                    }else if(checkedId==R.id.option4&&getArguments().getInt(CORRECT_ANSWER)==4){
-                        mListener.onOptionSelected(true);
-                    }else{
-                        mListener.onOptionSelected(false);
-                    }
+                if (checkedId == R.id.option1 && getArguments().getInt(CORRECT_ANSWER) == 1) {
+                    mIsCorrect = true;
+                } else if (checkedId == R.id.option2 && getArguments().getInt(CORRECT_ANSWER) == 2) {
+                    mIsCorrect = true;
+                } else if (checkedId == R.id.option3 && getArguments().getInt(CORRECT_ANSWER) == 3) {
+                    mIsCorrect = true;
+                } else if (checkedId == R.id.option4 && getArguments().getInt(CORRECT_ANSWER) == 4) {
+                    mIsCorrect = true;
+                } else {
+                    mIsCorrect = false;
                 }
+                mButton.setEnabled(true);
             });
         }
-        if(savedInstanceState!=null){
-            Log.i("opt1",savedInstanceState.getBoolean("opt1")+"");
-            Log.i("opt2",savedInstanceState.getBoolean("opt2")+"");
-            Log.i("opt3",savedInstanceState.getBoolean("opt3")+"");
-            Log.i("opt4",savedInstanceState.getBoolean("opt4")+"");
+        if (savedInstanceState != null) {
+            Log.i("opt1", savedInstanceState.getBoolean("opt1") + "");
+            Log.i("opt2", savedInstanceState.getBoolean("opt2") + "");
+            Log.i("opt3", savedInstanceState.getBoolean("opt3") + "");
+            Log.i("opt4", savedInstanceState.getBoolean("opt4") + "");
 //            mOptions.check(R.id.option1);
 //            mOption1.setChecked(savedInstanceState.getBoolean("opt1"));
 //            mOption1.setActivated(true);
@@ -120,16 +121,24 @@ public class MultipleChoiceFragment extends Fragment {
 //            mOption3.setChecked(savedInstanceState.getBoolean("opt3"));
 //            mOption4.setChecked(savedInstanceState.getBoolean("opt4"));
         }
+
+        AlertDialog confirmDialog = new AlertDialog.Builder(v.getContext()).setMessage(getString(R.string.confirm_msg)).
+                setCancelable(false).
+                setPositiveButton(getString(R.string.yes), (dialog, which) -> mListener.goToNext(mIsCorrect)).
+                setNegativeButton(getString(R.string.no), (dialog, which) -> dialog.cancel()).
+                setTitle(getString(R.string.confirm_title)).create();
+
+        mButton.setOnClickListener((view) -> confirmDialog.show());
         return v;
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean("opt1",mOption1.isChecked());
-        outState.putBoolean("opt2",mOption2.isChecked());
-        outState.putBoolean("opt3",mOption3.isChecked());
-        outState.putBoolean("opt4",mOption4.isChecked());
+        outState.putBoolean("opt1", mOption1.isChecked());
+        outState.putBoolean("opt2", mOption2.isChecked());
+        outState.putBoolean("opt3", mOption3.isChecked());
+        outState.putBoolean("opt4", mOption4.isChecked());
     }
 
     @Override
@@ -161,8 +170,6 @@ public class MultipleChoiceFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnOptionSelectedListener {
-        // TODO: Update argument type and name
-        boolean onOptionSelected(Boolean isCorrect);
-        void goToNext(View view);
+        void goToNext(boolean isCorrect);
     }
 }

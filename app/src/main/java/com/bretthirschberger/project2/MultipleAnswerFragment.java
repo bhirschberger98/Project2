@@ -1,7 +1,7 @@
 package com.bretthirschberger.project2;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -29,7 +29,8 @@ public class MultipleAnswerFragment extends Fragment {
     private static final String OPTION4 = "option4";
     private static final String OPTION5 = "option5";
     private static final String QUESTION = "question";
-    private static final String CORRECT_ANSWER = "correctAnswer";
+    private static final String CORRECT_ANSWER1 = "correctAnswer1";
+    private static final String CORRECT_ANSWER2 = "correctAnswer2";
 
     private TextView mQuestion;
 
@@ -43,6 +44,9 @@ public class MultipleAnswerFragment extends Fragment {
 
     private Button mButton;
 
+    private int mCorrectAnswer1;
+    private int mCorrectAnswer2;
+
     public MultipleAnswerFragment() {
         // Required empty public constructor
     }
@@ -53,7 +57,6 @@ public class MultipleAnswerFragment extends Fragment {
      *
      * @return A new instance of fragment MultipleAnswerFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MultipleAnswerFragment newInstance(MultipleAnswerQuestion question) {
         MultipleAnswerFragment fragment = new MultipleAnswerFragment();
         Bundle args = new Bundle();
@@ -63,10 +66,96 @@ public class MultipleAnswerFragment extends Fragment {
         args.putString(OPTION4, question.getOptions()[3]);
         args.putString(OPTION5, question.getOptions()[4]);
         args.putString(QUESTION, question.getQuestion());
+        args.putInt(CORRECT_ANSWER1, question.getCorrectAnswers()[0]);
+        args.putInt(CORRECT_ANSWER2, question.getCorrectAnswers()[1]);
         fragment.setArguments(args);
         return fragment;
     }
 
+    private boolean checkCorrect() {
+        if (mCorrectAnswer1 == 1 && mCorrectAnswer2 == 2 && mOption1.isChecked() &&
+                mOption2.isChecked() && !mOption3.isChecked() && !mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 1 && mCorrectAnswer2 == 3 && mOption1.isChecked() &&
+                !mOption2.isChecked() && mOption3.isChecked() && !mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 1 && mCorrectAnswer2 == 4 && mOption1.isChecked() &&
+                !mOption2.isChecked() && !mOption3.isChecked() && mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 1 && mCorrectAnswer2 == 5 && mOption1.isChecked() &&
+                !mOption2.isChecked() && !mOption3.isChecked() && !mOption4.isChecked() &&
+                mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 2 && mCorrectAnswer2 == 1 && mOption1.isChecked() &&
+                mOption2.isChecked() && !mOption3.isChecked() && !mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 2 && mCorrectAnswer2 == 3 && !mOption1.isChecked() &&
+                mOption2.isChecked() && mOption3.isChecked() && !mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 2 && mCorrectAnswer2 == 4 && !mOption1.isChecked() &&
+                mOption2.isChecked() && !mOption3.isChecked() && mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 2 && mCorrectAnswer2 == 5 && !mOption1.isChecked() &&
+                mOption2.isChecked() && !mOption3.isChecked() && !mOption4.isChecked() &&
+                mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 3 && mCorrectAnswer2 == 1 && mOption1.isChecked() &&
+                !mOption2.isChecked() && mOption3.isChecked() && !mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 3 && mCorrectAnswer2 == 2 && !mOption1.isChecked() &&
+                mOption2.isChecked() && mOption3.isChecked() && !mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 3 && mCorrectAnswer2 == 4 && !mOption1.isChecked() &&
+                !mOption2.isChecked() && mOption3.isChecked() && mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 3 && mCorrectAnswer2 == 5 && !mOption1.isChecked() &&
+                !mOption2.isChecked() && mOption3.isChecked() && !mOption4.isChecked() &&
+                mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 4 && mCorrectAnswer2 == 1 && mOption1.isChecked() &&
+                !mOption2.isChecked() && !mOption3.isChecked() && mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 4 && mCorrectAnswer2 == 2 && !mOption1.isChecked() &&
+                mOption2.isChecked() && !mOption3.isChecked() && mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 4 && mCorrectAnswer2 == 3 && !mOption1.isChecked() &&
+                !mOption2.isChecked() && !mOption3.isChecked() && !mOption4.isChecked() &&
+                !mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 4 && mCorrectAnswer2 == 5 && !mOption1.isChecked() &&
+                !mOption2.isChecked() && !mOption3.isChecked() && mOption4.isChecked() &&
+                mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 5 && mCorrectAnswer2 == 1 && mOption1.isChecked() &&
+                !mOption2.isChecked() && !mOption3.isChecked() && !mOption4.isChecked() &&
+                mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 5 && mCorrectAnswer2 == 2 && !mOption1.isChecked() &&
+                mOption2.isChecked() && !mOption3.isChecked() && !mOption4.isChecked() &&
+                mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 5 && mCorrectAnswer2 == 3 && !mOption1.isChecked() &&
+                !mOption2.isChecked() && mOption3.isChecked() && !mOption4.isChecked() &&
+                mOption5.isChecked()) {
+            return true;
+        } else if (mCorrectAnswer1 == 5 && mCorrectAnswer2 == 4 && !mOption1.isChecked() &&
+                !mOption2.isChecked() && !mOption3.isChecked() && mOption4.isChecked() &&
+                mOption5.isChecked()) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +168,6 @@ public class MultipleAnswerFragment extends Fragment {
         mOption5 = v.findViewById(R.id.check_option5);
         mQuestion = v.findViewById(R.id.question);
         mButton = v.findViewById(R.id.next);
-        mButton.setOnClickListener(mListener::goToNext);
         if (getArguments() != null) {
             mOption1.setText(getArguments().getString(OPTION1));
             mOption2.setText(getArguments().getString(OPTION2));
@@ -87,7 +175,15 @@ public class MultipleAnswerFragment extends Fragment {
             mOption4.setText(getArguments().getString(OPTION4));
             mOption5.setText(getArguments().getString(OPTION5));
             mQuestion.setText(getArguments().getString(QUESTION));
+            mCorrectAnswer1=getArguments().getInt(CORRECT_ANSWER1);
+            mCorrectAnswer2=getArguments().getInt(CORRECT_ANSWER2);
         }
+        AlertDialog confirmDialog = new AlertDialog.Builder(v.getContext()).setMessage(getString(R.string.confirm_msg)).
+                setCancelable(false).
+                setPositiveButton(getString(R.string.yes), (dialog, which) -> mListener.goToNext(checkCorrect())).
+                setNegativeButton(getString(R.string.no), (dialog, which) -> dialog.cancel()).
+                setTitle(getString(R.string.confirm_title)).create();
+        mButton.setOnClickListener((view) -> confirmDialog.show());
         return v;
     }
 
@@ -121,6 +217,6 @@ public class MultipleAnswerFragment extends Fragment {
      */
     public interface OnOptionSelectedListener {
         // TODO: Update argument type and name
-        void goToNext(View view);
+        void goToNext(boolean isCorrect);
     }
 }

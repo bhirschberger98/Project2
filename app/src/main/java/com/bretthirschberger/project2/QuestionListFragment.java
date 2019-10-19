@@ -24,10 +24,8 @@ import android.widget.ListView;
  * create an instance of this fragment.
  */
 public class QuestionListFragment extends ListFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-    private static final String[] questionArray = {"Question 1", "Question 2", "Question 2"};
+    private static final String[] questionArray = {"Question 1", "Question 2", "Question 3"};
 
     private OnQuestionListInteractionListener mListener;
 

@@ -25,6 +25,11 @@
     <string name="invalid_email">Invalid Email</string>
     <string name="rules">There Will be 5 questions, both multiple choice and multiple answer. Good Luck!</string>
 
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm_title">Confirm</string>
+    <string name="confirm_msg">Are you sure?</string>
+
     <string name="q1">What is the largest planet in the solar system</string>
     <string name="q1a1">The Sun</string>
     <string name="q1a2">Jupiter</string>

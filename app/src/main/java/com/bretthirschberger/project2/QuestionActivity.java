@@ -10,7 +10,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 public class QuestionActivity extends AppCompatActivity implements
@@ -20,6 +19,7 @@ public class QuestionActivity extends AppCompatActivity implements
     private QuestionListFragment mQuestionListFragment;
     private FragmentManager mFragmentManager;
     private int mQuestionNumber;
+    private int mCorrectAnswers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class QuestionActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_question);
         if(savedInstanceState!=null){
            mQuestionNumber=savedInstanceState.getInt("questionNumber");
+           mCorrectAnswers=savedInstanceState.getInt("correctAnswers");
         }else{
             //creates dialogue window
             Dialog dialog = new Dialog(this);
@@ -70,6 +71,7 @@ public class QuestionActivity extends AppCompatActivity implements
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("questionNumber",mQuestionNumber);
+        outState.getInt("correctAnswers",mCorrectAnswers);
     }
 
     private void displayQuestionList() {
@@ -93,13 +95,7 @@ public class QuestionActivity extends AppCompatActivity implements
         fragmentTransaction.commit();
     }
 
-    @Override
-    public boolean onOptionSelected(Boolean isCorrect) {
-        if (isCorrect) {
-            Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
-        }
-        return isCorrect;
-    }
+
 
     @Override
     public void onListItemChanged(int i) {
@@ -108,9 +104,13 @@ public class QuestionActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void goToNext(View view) {
-        mQuestionNumber+=1;
-        displayQuestion(mQuestions[mQuestionNumber]);
+    public void goToNext(boolean isCorrect) {
+        if (isCorrect) {
+            Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
+            mCorrectAnswers++;
+        }
+        displayQuestion(mQuestions[++mQuestionNumber]);
 
     }
+
 }
