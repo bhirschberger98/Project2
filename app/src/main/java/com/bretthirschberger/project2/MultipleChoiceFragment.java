@@ -1,17 +1,19 @@
 package com.bretthirschberger.project2;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 
 /**
@@ -23,12 +25,11 @@ import android.widget.RadioGroup;
  * create an instance of this fragment.
  */
 public class MultipleChoiceFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String QUESTION1 = "question1";
-    private static final String QUESTION2 = "question2";
-    private static final String QUESTION3 = "question3";
-    private static final String QUESTION4 = "question4";
+    private static final String OPTION1 = "option1";
+    private static final String OPTION2 = "option2";
+    private static final String OPTION3 = "option3";
+    private static final String OPTION4 = "option4";
+    private static final String QUESTION = "question";
     private static final String CORRECT_ANSWER = "correctAnswer";
 
     private OnOptionSelectedListener mListener;
@@ -40,6 +41,10 @@ public class MultipleChoiceFragment extends Fragment {
     private RadioButton mOption3;
     private RadioButton mOption4;
 
+    private TextView mQuestion;
+
+    private Button mButton;
+
     public MultipleChoiceFragment() {
         // Required empty public constructor
     }
@@ -50,14 +55,14 @@ public class MultipleChoiceFragment extends Fragment {
      *
      * @return A new instance of fragment MultipleChoiceFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MultipleChoiceFragment newInstance(MultipleChoiceQuestion question) {
         MultipleChoiceFragment fragment = new MultipleChoiceFragment();
         Bundle args = new Bundle();
-        args.putString(QUESTION1, question.getOptions()[0]);
-        args.putString(QUESTION2, question.getOptions()[1]);
-        args.putString(QUESTION3, question.getOptions()[2]);
-        args.putString(QUESTION4, question.getOptions()[3]);
+        args.putString(OPTION1, question.getOptions()[0]);
+        args.putString(OPTION2, question.getOptions()[1]);
+        args.putString(OPTION3, question.getOptions()[2]);
+        args.putString(OPTION4, question.getOptions()[3]);
+        args.putString(QUESTION, question.getQuestion());
         args.putInt(CORRECT_ANSWER, question.getCorrectAnswer());
         fragment.setArguments(args);
         return fragment;
@@ -72,29 +77,59 @@ public class MultipleChoiceFragment extends Fragment {
         mOption2 = v.findViewById(R.id.option2);
         mOption3 = v.findViewById(R.id.option3);
         mOption4 = v.findViewById(R.id.option4);
-        mOptions =v.findViewById(R.id.options);
+        mOptions = v.findViewById(R.id.options);
+        mQuestion = v.findViewById(R.id.question);
+        mButton = v.findViewById(R.id.next);
+        mButton.setOnClickListener(mListener::goToNext);
         if (getArguments() != null) {
-            mOption1.setText(getArguments().getString(QUESTION1));
-            mOption2.setText(getArguments().getString(QUESTION2));
-            mOption3.setText(getArguments().getString(QUESTION3));
-            mOption4.setText(getArguments().getString(QUESTION4));
+            mOption1.setText(getArguments().getString(OPTION1));
+            mOption2.setText(getArguments().getString(OPTION2));
+            mOption3.setText(getArguments().getString(OPTION3));
+            mOption4.setText(getArguments().getString(OPTION4));
+            mQuestion.setText(getArguments().getString(QUESTION));
             mOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    Log.i("ans",checkedId+"");
-                    Log.i("ans",getArguments().getInt(CORRECT_ANSWER)+"");
-                    mListener.onOptionSelected(true);
+                    Log.i("ans", checkedId + "");
+                    Log.i("ans", getArguments().getInt(CORRECT_ANSWER) + "");
+//                    getView().findViewById(R.id.option1).get
+                    if(checkedId==R.id.option1&&getArguments().getInt(CORRECT_ANSWER)==1){
+                        mListener.onOptionSelected(true);
+                    }else if(checkedId==R.id.option2&&getArguments().getInt(CORRECT_ANSWER)==2){
+                        mListener.onOptionSelected(true);
+                    }else if(checkedId==R.id.option3&&getArguments().getInt(CORRECT_ANSWER)==3){
+                        mListener.onOptionSelected(true);
+                    }else if(checkedId==R.id.option4&&getArguments().getInt(CORRECT_ANSWER)==4){
+                        mListener.onOptionSelected(true);
+                    }else{
+                        mListener.onOptionSelected(false);
+                    }
                 }
             });
+        }
+        if(savedInstanceState!=null){
+            Log.i("opt1",savedInstanceState.getBoolean("opt1")+"");
+            Log.i("opt2",savedInstanceState.getBoolean("opt2")+"");
+            Log.i("opt3",savedInstanceState.getBoolean("opt3")+"");
+            Log.i("opt4",savedInstanceState.getBoolean("opt4")+"");
+//            mOptions.check(R.id.option1);
+//            mOption1.setChecked(savedInstanceState.getBoolean("opt1"));
+//            mOption1.setActivated(true);
+//            mOption2.setChecked(savedInstanceState.getBoolean("opt2"));
+            mOption2.setChecked(true);
+//            mOption3.setChecked(savedInstanceState.getBoolean("opt3"));
+//            mOption4.setChecked(savedInstanceState.getBoolean("opt4"));
         }
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-//            mListener.OnOptionSelectedListener(uri);
-        }
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("opt1",mOption1.isChecked());
+        outState.putBoolean("opt2",mOption2.isChecked());
+        outState.putBoolean("opt3",mOption3.isChecked());
+        outState.putBoolean("opt4",mOption4.isChecked());
     }
 
     @Override
@@ -128,5 +163,6 @@ public class MultipleChoiceFragment extends Fragment {
     public interface OnOptionSelectedListener {
         // TODO: Update argument type and name
         boolean onOptionSelected(Boolean isCorrect);
+        void goToNext(View view);
     }
 }

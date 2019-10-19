@@ -1,11 +1,9 @@
 package com.bretthirschberger.project2;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -53,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        String email = mEmailField.getText().toString().trim();
-        if (checkValidLogin()) {
-//            startActivity(new Intent(this, AccountHome.class).putExtra("email", email));
+        //TODO change back to checkValidLogin() (done for debuging purposes)
+        if (true) {
             startActivity(new Intent(this, QuestionActivity.class));
         } else {
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.login_failed), Toast.LENGTH_SHORT).show();

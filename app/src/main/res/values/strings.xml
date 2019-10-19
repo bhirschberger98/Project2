@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project1</string>
+    <string name="app_name">Project2</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -38,7 +38,11 @@
     <string name="q2a4">Americium</string>
     <string name="q2a5">Oxygen</string>
 
-    <string name="question3"></string>
+    <string name="question3">What is the capital of Wyoming</string>
+    <string name="q3a1">Gillette</string>
+    <string name="q3a2">Casper</string>
+    <string name="q3a3">Jackson</string>
+    <string name="q3a4">Cheyenne</string>
 
     <string name="question4"></string>
 
