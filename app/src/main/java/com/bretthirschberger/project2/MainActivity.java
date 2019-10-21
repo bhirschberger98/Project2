@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         //fills in edit text fields on rotation
         if (savedInstanceState != null) {
-            mEmailField.setText(savedInstanceState.getString("email","ERROR"));
-            mPasswordField.setText(savedInstanceState.getString("password","ERROR"));
+            mEmailField.setText(savedInstanceState.getString("email", "ERROR"));
+            mPasswordField.setText(savedInstanceState.getString("password", "ERROR"));
         }
     }
 
@@ -51,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        //TODO change back to checkValidLogin() (done for debuging purposes)
-        if (true) {
-            startActivity(new Intent(this, QuestionActivity.class));
+        if (checkValidLogin()) {
+            startActivity(new Intent(this, QuestionActivity.class).putExtra("email", mEmailField.getText().toString()));
         } else {
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
         }

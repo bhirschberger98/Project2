@@ -25,7 +25,7 @@ import android.widget.TextView;
  * Use the {@link MultipleChoiceFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MultipleChoiceFragment extends Fragment {
+public class MultipleChoiceFragment extends Fragment{
     private static final String OPTION1 = "option1";
     private static final String OPTION2 = "option2";
     private static final String OPTION3 = "option3";
@@ -113,13 +113,10 @@ public class MultipleChoiceFragment extends Fragment {
             Log.i("opt2", savedInstanceState.getBoolean("opt2") + "");
             Log.i("opt3", savedInstanceState.getBoolean("opt3") + "");
             Log.i("opt4", savedInstanceState.getBoolean("opt4") + "");
-//            mOptions.check(R.id.option1);
-//            mOption1.setChecked(savedInstanceState.getBoolean("opt1"));
-//            mOption1.setActivated(true);
-//            mOption2.setChecked(savedInstanceState.getBoolean("opt2"));
-            mOption2.setChecked(true);
-//            mOption3.setChecked(savedInstanceState.getBoolean("opt3"));
-//            mOption4.setChecked(savedInstanceState.getBoolean("opt4"));
+            mOption1.setChecked(savedInstanceState.getBoolean("opt1"));
+            mOption2.setChecked(savedInstanceState.getBoolean("opt2"));
+            mOption3.setChecked(savedInstanceState.getBoolean("opt3"));
+            mOption4.setChecked(savedInstanceState.getBoolean("opt4"));
         }
 
         AlertDialog confirmDialog = new AlertDialog.Builder(v.getContext()).setMessage(getString(R.string.confirm_msg)).

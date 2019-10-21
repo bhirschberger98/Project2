@@ -269,7 +269,6 @@ public class RegistrationActivity extends AppCompatActivity {
             writer.write(email + "," + name + "," + dob + "," + password + "\n");
             startActivity(new Intent(this, MainActivity.class));
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.account_created), Toast.LENGTH_SHORT).show();
-            ;
         } catch (IOException e) {
             e.printStackTrace();
         }

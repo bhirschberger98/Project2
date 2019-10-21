@@ -175,8 +175,8 @@ public class MultipleAnswerFragment extends Fragment {
             mOption4.setText(getArguments().getString(OPTION4));
             mOption5.setText(getArguments().getString(OPTION5));
             mQuestion.setText(getArguments().getString(QUESTION));
-            mCorrectAnswer1=getArguments().getInt(CORRECT_ANSWER1);
-            mCorrectAnswer2=getArguments().getInt(CORRECT_ANSWER2);
+            mCorrectAnswer1 = getArguments().getInt(CORRECT_ANSWER1);
+            mCorrectAnswer2 = getArguments().getInt(CORRECT_ANSWER2);
         }
         AlertDialog confirmDialog = new AlertDialog.Builder(v.getContext()).setMessage(getString(R.string.confirm_msg)).
                 setCancelable(false).
