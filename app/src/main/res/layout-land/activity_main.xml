@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:autofillHints="@string/email" />
 
         <EditText
             android:id="@+id/password_field_1"
@@ -32,7 +33,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:autofillHints="@string/password" />
 
     </LinearLayout>
 
@@ -45,7 +47,6 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <Button
-            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,7 +54,6 @@
             android:text="@string/login" />
 
         <Button
-            android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

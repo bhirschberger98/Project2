@@ -5,13 +5,14 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <TextView
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,49 +21,39 @@
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="153dp"
         android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list" />
+        app:layout_constraintStart_toEndOf="@+id/options"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/list"
+    <RadioGroup
+        android:id="@+id/options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question">
 
-        <CheckBox
-            android:id="@+id/check_option1"
+        <RadioButton
+            android:id="@+id/option1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/check_option2"
+        <RadioButton
+            android:id="@+id/option2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/check_option3"
+        <RadioButton
+            android:id="@+id/option3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/check_option4"
+        <RadioButton
+            android:id="@+id/option4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
-        <CheckBox
-            android:id="@+id/check_option5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

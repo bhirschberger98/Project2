@@ -2,6 +2,7 @@ package com.bretthirschberger.project2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -210,6 +211,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     public boolean isValidDate() {
 
         try {
@@ -251,10 +253,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 ".){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\" +
                 "x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
-        if (Pattern.compile(rfc5322, Pattern.CASE_INSENSITIVE).matcher(mEmailField.getText().toString().trim()).matches()) {
-            return true;
-        }
-        return false;
+        return Pattern.compile(rfc5322, Pattern.CASE_INSENSITIVE).matcher(mEmailField.getText().toString().trim()).matches();
     }
 
     public void register(View view) {

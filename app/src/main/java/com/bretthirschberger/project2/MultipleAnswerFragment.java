@@ -168,6 +168,13 @@ public class MultipleAnswerFragment extends Fragment {
         mOption5 = v.findViewById(R.id.check_option5);
         mQuestion = v.findViewById(R.id.question);
         mButton = v.findViewById(R.id.next);
+
+        mButton.setEnabled(false);
+        mOption1.setOnCheckedChangeListener((buttonView, isChecked) -> mButton.setEnabled(true));
+        mOption2.setOnCheckedChangeListener((buttonView, isChecked) -> mButton.setEnabled(true));
+        mOption3.setOnCheckedChangeListener((buttonView, isChecked) -> mButton.setEnabled(true));
+        mOption4.setOnCheckedChangeListener((buttonView, isChecked) -> mButton.setEnabled(true));
+        mOption5.setOnCheckedChangeListener((buttonView, isChecked) -> mButton.setEnabled(true));
         if (getArguments() != null) {
             mOption1.setText(getArguments().getString(OPTION1));
             mOption2.setText(getArguments().getString(OPTION2));
